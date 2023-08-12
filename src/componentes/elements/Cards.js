@@ -1,25 +1,34 @@
 import styles from './Cards.module.css'
 import ButtonB from './ButtonB'
-import UseState from 'react'
+import {useState} from 'react'
 
 function Cards({img, title, tech, description, repo, site }) {
     
-    const info = []
+    const [info, setInfo] = useState(false)
+    
+    function InfoOn(){
+        setInfo(true)
+    }
+
+    function InfoOff(){
+        setInfo(false)
+    }
 
     return(
-        <div className={styles.cards} id='cards'>
+        <div onMouseEnter={InfoOn} onMouseLeave={InfoOff} className={styles.cards}>
             
-            <a href={site}>
+            <a onMouseEnter={InfoOn} href={site}>
                 <img src={img} alt='Error'></img>
             </a>
-            {info.length > 1 &&(            
             
+            {info === true &&(            
                 <section>
                     <h3>{title}</h3>
                     <p><strong>Tecnologia:</strong> {tech}</p>
                     <p>{description}</p>
-                <ButtonB text='Acessar o Repositório' link={repo} />
-                </section>)}
+                <ButtonB text='Acessar o Repositório' link={repo}/>
+                </section>
+            )}
 
 
         </div>
